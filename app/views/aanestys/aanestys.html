@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>Äänestys: {{aanestys.nimi}}</h1>
+  
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+  
+<!--  <p>
+    <button class="btn btn-danger">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
+  </p>-->
+  
+<h2>Kuvaus</h2>
+  <p>
+    {{aanestys.kuvaus}}
+  </p>
+
+<h3>Vaihtoehdot</h3>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Ehdokas</th>
+        <th>Tietoja</th>
+        <th>Aania</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for ehdokas in ehdokkaat %}
+        <tr>
+          <!--<td><a href="{{base_path}}/aanestys/{{aanestys.id}}">{{aanestys.nimi}}</td>-->
+            <td>{{ehdokas.nimi}}</td>
+            <td>{{ehdokas.kuvaus}}</td>
+            <td>{{ehdokas.aania}}</td>
+            <td>
+                <form method="post" action="{{base_path}}/aanesta">
+                    <input name='aanestysalkaa' value='{{aanestys.aanestysalkaa}}' type='hidden'>
+                    <input name='aanestysloppuu' value='{{aanestys.aanestysloppuu}}' type='hidden'>
+                    <input name='onkoid' value='{{aanestys.onkoid}}' type='hidden'>
+                    <input name='aanestysid' value='{{aanestys.id}}' type='hidden'>
+                    <input name='ehdokasid' value='{{ehdokas.id}}' type='hidden'>
+                    <input name='ehdokasnimi' value='{{ehdokas.nimi}}' type='hidden'>
+                    <button type="submit" class="button">Äänestä</button>
+                </form>
+            </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+{% endblock %}

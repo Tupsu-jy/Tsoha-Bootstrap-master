@@ -1,0 +1,60 @@
+
+
+{% extends "base.html" %}
+
+{% block content %}
+
+
+  {% if errors %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for error in errors %}
+          <li>{{error}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+
+  <h1>Uusi äänestys</h1>
+
+  <form method="post" action="{{base_path}}/aanestys">
+
+    <div class="form-group">
+      <label>Nimi</label>
+      <input name="nimi" class="form-control" value="{{attributes.nimi}}" type="text">
+    </div>
+    <div class="form-group">
+      <label>Äänestys alkaa (vvvv-kk-pp)</label>
+      <!--<input class="form-control" type="time" id="kellonaika" name="kellonaika">-->
+      <input name="aanestysalkaa" class="form-control" value="{{attributes.aanestysalkaa}}" type="text">
+    </div>
+    <div class="form-group">
+      <label>Äänestys loppuu (vvvv-kk-pp)</label>
+      <input name="aanestysloppuu" class="form-control" value="{{attributes.aanestysloppuu}}" type="text">
+    </div>
+    <div class="form-group">
+      <label>Kuvaus</label>
+      <textarea name="kuvaus" class="form-control">{{attributes.kuvaus}}
+      </textarea>
+    </div>
+    <div class="checkbox">
+      
+        <input type='hidden' value='false' name='onkoid'>
+        <input type='checkbox' value='true' name='onkoid'> Identifioitu äänestys
+        
+    </div>
+      
+
+      
+      <!--<h3>Vaihtoehdot</h3>-->
+
+
+<!--  <p>
+    <a href="#" class="btn btn-success">Lisää ehdokas</a>
+  </p>-->
+      <!--<a href="{{base_path}}/{{aanestys.id}}">-->
+    <button type="submit" class="btn btn-primary">Lisää ehdokkaat</button>
+  </form>
+    
+{% endblock %}
